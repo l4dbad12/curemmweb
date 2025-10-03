@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cure's Middleman Service - Staff Team</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 100%);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 1s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            border: 3px solid #9333ea;
+            box-shadow: 0 0 30px rgba(147, 51, 234, 0.5);
+            display: block;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #9333ea 0%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #a0a0a0;
+            margin-bottom: 30px;
+        }
+
+        .discord-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #9333ea, #c084fc);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.3);
+        }
+
+        .discord-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(147, 51, 234, 0.5);
+        }
+
+        .section {
+            margin-bottom: 80px;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #9333ea, transparent);
+        }
+
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .staff-card {
+            background: rgba(147, 51, 234, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(147, 51, 234, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .staff-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(147, 51, 234, 0.4);
+            border-color: rgba(147, 51, 234, 0.5);
+        }
+
+        .banner {
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(135deg, #9333ea 0%, #c084fc 100%);
+            position: relative;
+        }
+
+        .profile-section {
+            padding: 20px;
+            position: relative;
+            margin-top: -40px;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 5px solid #1a0a2e;
+            margin: 0 auto 15px;
+            display: block;
+            background: #2a1a3e;
+            object-fit: cover;
+        }
+
+        .username {
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .user-id {
+            text-align: center;
+            color: #888;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .join-date {
+            text-align: center;
+            color: #9333ea;
+            font-size: 0.85em;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .role-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #9333ea, #c084fc);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin: 0 auto;
+            display: block;
+            width: fit-content;
+        }
+
+        .role-badge.middleman {
+            background: linear-gradient(45deg, #7c3aed, #a78bfa);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+            border-top: 1px solid rgba(147, 51, 234, 0.2);
+            margin-top: 60px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            .section-title {
+                font-size: 2em;
+            }
+            
+            .staff-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <header>
+            <img src="https://i.imgur.com/9rPfLgV.gif" alt="Cure's Middleman Service" class="logo">
+            <h1>Cure's Middleman Service</h1>
+            <p class="subtitle">Cure's MM: Trusted, Fast MM Dedicated To Making Your Trades Safe & Secure.<br>Our Trusted Staff Team Is Listed Below</p>
+            <a href="https://discord.gg/curemm" class="discord-btn" target="_blank">
+                Join Discord Server
+            </a>
+        </header>
+
+        <div class="section">
+            <h2 class="section-title">Management</h2>
+            <div class="staff-grid">
+                <div class="staff-card">
+                    <div class="banner"></div>
+                    <div class="profile-section">
+                        <img src="https://cdn.discordapp.com/avatars/879926720847810600/4dae81e6b417dd347a9f9c55711eb461.png" alt="curee_" class="avatar">
+                        <div class="username">curee_</div>
+                        <div class="user-id">ID: 879926720847810600</div>
+                        <div class="join-date">Joined: 03/12/2023</div>
+                        <span class="role-badge">Management</span>
+                    </div>
+                </div>
+
+                <div class="staff-card">
+                    <div class="banner" style="background: linear-gradient(135deg, #a855f7 0%, #d946ef 100%);"></div>
+                    <div class="profile-section">
+                        <img src="https://cdn.discordapp.com/avatars/1152996917547122768/4862ab410f50fcc8feb4e6c326878aac.png" alt="m1ax." class="avatar">
+                        <div class="username">m1ax.</div>
+                        <div class="user-id">ID: 1152996917547122768</div>
+                        <div class="join-date">Joined: 10/02/2025</div>
+                        <span class="role-badge">Management</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Middlemen</h2>
+            <div class="staff-grid">
+                <div class="staff-card">
+                    <div class="banner" style="background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);"></div>
+                    <div class="profile-section">
+                        <img src="https://cdn.discordapp.com/avatars/975029249905946644/a_f4c47714ab13fce2c12899773833b9ee.gif?size=4096" alt="celesteskies._." class="avatar">
+                        <div class="username">celesteskies._.</div>
+                        <div class="user-id">ID: 975029249905946644</div>
+                        <div class="join-date">Joined: 09/17/2025</div>
+                        <span class="role-badge middleman">Middleman</span>
+                    </div>
+                </div>
+
+                <div class="staff-card">
+                    <div class="banner" style="background: linear-gradient(135deg, #8b5cf6 0%, #c084fc 100%);"></div>
+                    <div class="profile-section">
+                        <img src="https://cdn.discordapp.com/avatars/1356149794040446998/834fad3ea7043702f425c1e1bba063a1.png?size=4096" alt="az5n" class="avatar">
+                        <div class="username">az5n</div>
+                        <div class="user-id">ID: 1356149794040446998</div>
+                        <div class="join-date">Joined: 09/08/2025</div>
+                        <span class="role-badge middleman">Middleman</span>
+                    </div>
+                </div>
+
+                <div class="staff-card">
+                    <div class="banner" style="background: linear-gradient(135deg, #6d28d9 0%, #9333ea 100%);"></div>
+                    <div class="profile-section">
+                        <img src="https://cdn.discordapp.com/avatars/892928471892893747/74f88165fa7947bc931c44a7e7ba2b1f.png?size=4096" alt="strawbsleepy" class="avatar">
+                        <div class="username">strawbsleepy</div>
+                        <div class="user-id">ID: 892928471892893747</div>
+                        <div class="join-date">Joined: 07/23/2025</div>
+                        <span class="role-badge middleman">Middleman</span>
+                    </div>
+                </div>
+
+                <div class="staff-card">
+                    <div class="banner" style="background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);"></div>
+                    <div class="profile-section">
+                        <img src="https://cdn.discordapp.com/avatars/1066696391243616266/43c548ac56d45c3b51c882aef202a345.png?size=4096" alt="e.a.r.t.h2.0" class="avatar">
+                        <div class="username">e.a.r.t.h2.0</div>
+                        <div class="user-id">ID: 1066696391243616266</div>
+                        <div class="join-date">Joined: 07/22/2025</div>
+                        <span class="role-badge middleman">Middleman</span>
+                    </div>
+                </div>
+
+                <div class="staff-card">
+                    <div class="banner" style="background: linear-gradient(135deg, #9333ea 0%, #c084fc 100%);"></div>
+                    <div class="profile-section">
+                        <img src="https://cdn.discordapp.com/avatars/535203478373531668/4298e8eaa16c22a36fa57716c29e1c9a.png?size=4096" alt="4vzp" class="avatar">
+                        <div class="username">4vzp</div>
+                        <div class="user-id">ID: 535203478373531668</div>
+                        <div class="join-date">Joined: 09/08/2025</div>
+                        <span class="role-badge middleman">Middleman</span>
+                    </div>
+                </div>
+
+                <div class="staff-card">
+                    <div class="banner" style="background: linear-gradient(135deg, #8b5cf6 0%, #d946ef 100%);"></div>
+                    <div class="profile-section">
+                        <img src="https://cdn.discordapp.com/avatars/1327661459278401546/6f6ae80cbff0997bd5b93deb34ae5654.png?size=4096" alt="lost4soulz" class="avatar">
+                        <div class="username">lost4soulz</div>
+                        <div class="user-id">ID: 1327661459278401546</div>
+                        <div class="join-date">Joined: 08/21/2025</div>
+                        <span class="role-badge middleman">Middleman</span>
+                    </div>
+                </div>
+
+                <div class="staff-card">
+                    <div class="banner" style="background: linear-gradient(135deg, #7c3aed 0%, #c084fc 100%);"></div>
+                    <div class="profile-section">
+                        <img src="https://cdn.discordapp.com/avatars/973573471420428378/b84200635b43882d9417671b21e3981b.png?size=4096" alt="weirdnilo" class="avatar">
+                        <div class="username">weirdnilo</div>
+                        <div class="user-id">ID: 973573471420428378</div>
+                        <div class="join-date">Joined: 08/24/2025</div>
+                        <span class="role-badge middleman">Middleman</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Cure's Middleman Service. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = Math.random() * 3 + 'px';
+            star.style.height = star.style.width;
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+    </script>
+</body>
+</html>
